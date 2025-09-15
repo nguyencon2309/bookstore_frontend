@@ -1,12 +1,18 @@
 import axiosClient from '../utils/customFetch';
-interface FormData {
+export interface LoginForm {
     email:String,
     password:String
 }
+export interface LoginResponse {
+  message: string;
+  token?: string;
+  role?: string;
+  name?: string;
+}
 const LoginAPI = {
-  login: (formData:FormData) => {
-    const url = `/auth/login`;
-    return axiosClient.applicationNoAuth.post(url, formData);
+  login: (formData:LoginForm) => {
+    const url = `/user/login`;
+    return axiosClient.applicationNoAuth.post<LoginResponse>(url, formData);
   },
 };
 

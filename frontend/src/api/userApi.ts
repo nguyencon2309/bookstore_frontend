@@ -5,10 +5,14 @@ interface FormData {
     name:String
 }
 const UserAPI = {
-  login: (formData:FormData) => {
+  register: (formData:FormData) => {
     const url = `/user/register`;
     return axiosClient.applicationNoAuth.post(url, formData);
   },
+  logout : () =>{
+    const url = `/user/logout`;
+    return axiosClient.application.get(url);
+  }
 };
 
 export default UserAPI;

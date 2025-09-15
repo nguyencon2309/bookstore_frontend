@@ -1,13 +1,13 @@
 import axios,{type AxiosInstance} from 'axios';
 import queryString from 'query-string';
-const baseURL = import.meta.env.VITE_API_URL;
+const baseURL = import.meta.env.VITE_API_BE_URL;
 
 interface AxiosClient{
     application: AxiosInstance;
     applicationNoAuth: AxiosInstance;
     formData: AxiosInstance;
 }
-
+console.log(import.meta.env);
 const axiosClient:AxiosClient = {
   application: axios.create({
     baseURL,
@@ -15,6 +15,7 @@ const axiosClient:AxiosClient = {
     headers: {
       'content-type': 'application/json',
     },
+    withCredentials: true,
     paramsSerializer: (params) => queryString.stringify(params),
   }),
 

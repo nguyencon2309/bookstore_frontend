@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginAPI, {type LoginForm } from "../api/loginApi";
+import { useAuth } from "../contexts/AccountContext";
 const Login =() =>{
   const [formData, setFormData] = useState<LoginForm>({ email: "", password: "" });
   const [error, setError] = useState("");
   const [loading,setLoading] = useState(false);
   const navigate = useNavigate();
+  const {login } = useAuth();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -22,12 +24,14 @@ const Login =() =>{
       console.log(res)
 
       if (res.data.token) {
-        // Lưu token + user info vào localStorage
         
-        localStorage.setItem("role", res.data.role || "");
-        localStorage.setItem("username_bookstore", res.data.name || "test");
+        
+        
+        
+        login({"email":formData.email,"name":res.data.user,"role":res.data.role},res.data.token)
 
-        // điều hướng về homepage
+
+        
         navigate("/");
       } else {
         setError(res.data.message || "Login failed");

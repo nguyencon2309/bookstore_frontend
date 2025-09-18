@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState,useContext,  useEffect } from "react";
 import userApi from "../api/userApi";
-
+import { useAuth } from "../contexts/AccountContext";
 const Navbar = () => {
-  const [user,setUser] = useState(localStorage.getItem("username_bookstore")||null);
+    
+  const {account,logout} = useAuth()
+  
   const handleLogout = async() => {
-    localStorage.removeItem("username_bookstore");
-    localStorage.removeItem("user_Id");
-    setUser(null);
+    console.log("logout")
+    
     try{
       const res =await userApi.logout();
       console.log(res);
@@ -16,19 +17,19 @@ const Navbar = () => {
       console.log(err)
     }
     finally{
-      
+      logout();
     }
   }
   return (
     <nav className="flex gap-4 p-4 bg-gray-100">
       <Link to="/" style={{ marginRight: "10px" }}>Home</Link>
       <Link to="/book" style={{ marginRight: "10px" }}>Books</Link>
-      {!user ?
+      {!account?.name?
       (<Link to="/login">Login</Link>)
       :
       (
         <div className="flex items-center gap-2">
-          <span>👤 {user}</span>
+          <span>👤 {account?.name}</span>
           <button onClick={handleLogout} className="text-red-500">
             Logout
           </button>

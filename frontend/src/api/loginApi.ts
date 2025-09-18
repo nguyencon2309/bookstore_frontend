@@ -7,7 +7,7 @@ export interface LoginResponse {
   message: string;
   token?: string;
   role?: string;
-  name?: string;
+  user?: string;
 }
 const LoginAPI = {
   login: (formData:LoginForm) => {

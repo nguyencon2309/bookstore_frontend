@@ -21,16 +21,16 @@ const Navbar = () => {
     }
   }
   return (
-    <nav className="flex gap-4 p-4 bg-gray-100">
-      <Link to="/" style={{ marginRight: "10px" }}>Home</Link>
-      <Link to="/book" style={{ marginRight: "10px" }}>Books</Link>
+    <nav className="w-screen bg-blue-200 color-white p-2 z-3 flex justify-between sticky top-0">
+      <Link to="/" className="text-2xl" >BOOKSTORE</Link>
+      
       {!account?.name?
-      (<Link to="/login">Login</Link>)
+      (<Link to="/login" className="text-lg">Login</Link>)
       :
       (
         <div className="flex items-center gap-2">
           <span>👤 {account?.name}</span>
-          <button onClick={handleLogout} className="text-red-500">
+          <button onClick={handleLogout} className="text-red-500 text-lg">
             Logout
           </button>
         </div>

@@ -11,7 +11,7 @@ const BookAPI = {
     const url = "/book/getList";
     return axiosClient.applicationNoAuth.get(url, { params });
   },
-  getDetailBook : (id:String) => {
+  getDetailBook : (id:string) => {
     const url = `/book/${id}`;
     return axiosClient.applicationNoAuth.get(url);
   }
